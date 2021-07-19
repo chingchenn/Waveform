@@ -13,26 +13,26 @@ from download_waveform_bob import download_waveform
 from waveform_plot_indiv_bob import WaveformPlotIndiv
 
      ######### Obervation Setup ##########
-dleft, dright = 0, 30*60                # waveform cut length (left and right relative to origin time)
+dleft, dright = 0, 120*60                # waveform cut length (left and right relative to origin time)
 waveform_type = 'DISP'
 model_name = "ak135"
 freqmin = 0.01
-freqmax = 0.1
-minlat = -75
-maxlat = 75
-minlon = -179
-maxlon = 179
+freqmax = 10
+minlat = 15
+maxlat = 25
+minlon = -105
+maxlon = -95
 
     ############## DO WHAT ###############
-data = 0                                # Download data and remove instrument response
+data = 0                               # Download data and remove instrument response
                                         # Download data 
                                         # remove instrument response
                                         
 waveform_plot_individual = 1            # Plot individual waveforms 
-waveform_plot_all_in_distance = 1       # Plot the waveform of all stations (arrange in distance)
-ENZtoRTZ = 1
+waveform_plot_all_in_distance = 0       # Plot the waveform of all stations (arrange in distance)
+ENZtoRTZ = 0
 ############## read catalog ##############
-i = 15
+i = 12
 event_info_df = pd.read_csv("event_catalog.csv")
 event_name = event_info_df.loc[i,'event_name']
 time = event_info_df.loc[i,'origin_time']
@@ -45,13 +45,10 @@ event_catalog = "event_catalog.csv"
 ################ download the data & plot stations##############
 if data:
     download_waveform(event_name, time, cevent, dleft, dright, waveform_type,
-                      minlat,minlon,maxlat,maxlon,
-                      download_data = download_data,
-                      remove_ins = remove_ins,
-                      download_dir = download_dir)
+                      minlat,minlon,maxlat,maxlon, download_dir = download_dir)
 ################ plot waveform for individual stations ##############
 if waveform_plot_all_in_distance:
-    WaveformPlotAll(i,'BHZ',event_name,waveform_type,dleft=dleft, download_dir=download_dir,event_catalog=event_catalog,
+    WaveformPlotAll(i,'HHZ',event_name,waveform_type,dleft=dleft, download_dir=download_dir,event_catalog=event_catalog,
                     model_name=model_name, freqmin=freqmin, freqmax=freqmax)
 if waveform_plot_individual:
     WaveformPlotIndiv(i,event_name,waveform_type,dleft=dleft, download_dir=download_dir,event_catalog=event_catalog,
