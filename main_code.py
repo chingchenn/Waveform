@@ -15,7 +15,7 @@ from waveform_plot_indiv import WaveformPlotIndiv
      ######### Obervation Setup ##########
 dleft, dright = 0, 120*60                # waveform cut length (left and right relative to origin time)
 waveform_type = 'DISP'
-model_name = "ak135"
+model_name = "iasp91"
 freqmin = 0.01
 freqmax = 10
 minlat = 15
