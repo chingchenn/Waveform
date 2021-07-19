@@ -20,7 +20,7 @@ maxlat = 25
 minlon = -105  
 maxlon = -95  
     
-   ######### DO WHAT ########## 
+   ######### DO WHAT ##########   
 data = 0                                # Download data and remove instrument response                                          
 waveform_plot_individual = 0            # Plot individual waveforms   
 waveform_plot_all_in_distance = 0       # Plot the waveform of all stations (arrange in distance)  
