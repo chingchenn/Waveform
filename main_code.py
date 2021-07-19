@@ -8,9 +8,9 @@ Created on Fri Dec 25 20:42:11 2020
 
 import pandas as pd
 from toRTZ import enztortz
-from waveform_plot_all_bob import WaveformPlotAll
-from download_waveform_bob import download_waveform
-from waveform_plot_indiv_bob import WaveformPlotIndiv
+from waveform_plot_all import WaveformPlotAll
+from download_waveform import download_waveform
+from waveform_plot_indiv import WaveformPlotIndiv
 
      ######### Obervation Setup ##########
 dleft, dright = 0, 120*60                # waveform cut length (left and right relative to origin time)
