@@ -102,20 +102,20 @@ def download_waveform(event_name,time,cevent,dleft,dright,waveform_type,minlat,m
                 cha = sta[i].code
                 azi = sta[i].azimuth
                 dip = sta[i].dip
-                # wave_data = glob(f"{waveform_storage_loc}/{net.code}.{sta.code}.{loc}.{cha}*.mseed")
-                wave_data = glob(f"{waveform_storage_loc}/{net.code}.{sta.code}.{loc}.{cha}*.sac")
+                wave_data = glob(f"{waveform_storage_loc}/{net.code}.{sta.code}.{loc}.{cha}*.mseed")
+                # wave_data = glob(f"{waveform_storage_loc}/{net.code}.{sta.code}.{loc}.{cha}*.sac")
                 print(wave_data)
                 if wave_data:
                     st = read(wave_data[0])
                     st_wir = st.remove_response(inventory=inv, pre_filt=pre_filt,\
                                                 water_level=60, output='DISP')
-                    # new_stream = f"{new_waveforms_loc}/{waveform_type}_{net.code}.{sta.code}.{loc}.{cha}.mseed"
-                    new_stream = f"{new_waveforms_loc}/{waveform_type}_{net.code}.{sta.code}.{loc}.{cha}.sac"
+                    new_stream = f"{new_waveforms_loc}/{waveform_type}_{net.code}.{sta.code}.{loc}.{cha}.mseed"
+                    # new_stream = f"{new_waveforms_loc}/{waveform_type}_{net.code}.{sta.code}.{loc}.{cha}.sac"
                     print(new_stream)
                     if os.path.exists(new_stream):
                         os.remove(new_stream)
-                    # st_wir.write(new_stream, format="MSEED")
-                    st_wir.write(new_stream, format="SAC")
+                    st_wir.write(new_stream, format="MSEED")
+                    # st_wir.write(new_stream, format="SAC")
                     net_name.append(net.code)
                     station_name.append(sta.code)
                     station_lat.append(sta.latitude)

@@ -34,8 +34,6 @@ def WaveformPlotAll(j,CHANN,event_name,waveform_type,dleft=0, download_dir="proj
     
     max_of_all = 0 
     for i,net in enumerate(direc_df['Net']):
-        if i >35:
-            break
         net = net
         sta = direc_df.loc[i,'Sta']
         loc = direc_df.loc[i,'Loc']
@@ -92,20 +90,23 @@ def WaveformPlotAll(j,CHANN,event_name,waveform_type,dleft=0, download_dir="proj
             ax.text(700+50*(-1)**i, dis_deg, f'{sta}', fontsize=12)
             #ax.text(np.float(result['distance'])*10,np.float(result['distance']), f"{net}-{sta}")
             for arr in range(len(arrivals)):
-                ax.plot(arrivals[arr].time,dis_deg,marker='^', color='b')
-                if (arrivals[arr].name == "SKS"):
-                    ax.plot(arrivals[arr].time,dis_deg,'^',ms=20, color='orange')
+                # ax.plot(arrivals[arr].time,dis_deg,marker='^', color='b')
+                if (arrivals[arr].name == "SKS") or (arrivals[arr].name == "SKKS"):
+                    # ax.plot(arrivals[arr].time,dis_deg,'^',ms=20, color='orange')
+                    ax.vlines(arrivals[arr].time,dis_deg-0.5,dis_deg+0.5,color='orange',linestyles='solid')
             if p_arrival != 0: 
-                ax.plot(p_arrival,dis_deg,'^', color='b')
+                # ax.plot(p_arrival,dis_deg,'^', color='b')
+                ax.vlines(p_arrival,dis_deg-0.3,dis_deg+0.3,color='b',linestyles='solid')
             if s_arrival != 0: 
-                ax.plot(s_arrival,dis_deg,'^', color='red')
+                # ax.plot(s_arrival,dis_deg,'^', color='red')
+                ax.vlines(s_arrival,dis_deg-0.3,dis_deg+0.3,color='red',linestyles='solid')
         print()
         print()
     
     ax.plot(p_arrival,dis_deg,'^', color='b', label="P")
     ax.plot(s_arrival,dis_deg,'^', color='red', label="S")       
     
-    plt.xlim([800, 2000])    
+    plt.xlim([600, 1750])    
     # plt.xlim([600, 1800])    
     plt.xlabel('Time from Start Time') #P-arrival (in seconds)')
     plt.ylabel('Distance (in degrees)')
